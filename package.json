@@ -1,0 +1,12 @@
+{
+  "name": "hellocpp",
+  "version": "1.0.0",
+  "main": "",
+  "scripts": {
+    "cmake": "cd build && cmake .. -DCMAKE_TOOLCHAIN_FILE= ~/vcpkg/scripts/buildsystems/vcpkg.cmake",
+    "make": "cd build && make"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
