@@ -14,7 +14,7 @@ int main()
     http_client client(U("https://jsonplaceholder.typicode.com"));
 
     // İstek URI'sini oluştur
-    uri_builder builder(U("/posts/1"));
+    uri_builder builder(U("/posts"));
 
     // GET isteği gönder
     client.request(methods::GET, builder.to_string())
@@ -33,12 +33,20 @@ int main()
             const json::value &v = previousTask.get();
 
             // Tablo başlıklarını yazdır
-            std::wcout << std::setw(20) << std::left << U("Baslik") << U("Icerik") << std::endl;
-            std::wcout << std::setw(20) << std::left << U("------") << U("------") << std::endl;
+            std::wcout << std::setw(5) << std::left << U("No") 
+                       << std::setw(30) << std::left << U("Baslik") 
+                       << U("Icerik") << std::endl;
+            std::wcout << std::setw(5) << std::left << U("--") 
+                       << std::setw(30) << std::left << U("------") 
+                       << U("------") << std::endl;
 
             // JSON değerini yazdır
-            std::wcout << std::setw(20) << std::left << v.at(U("title")).as_string().c_str()
-                       << v.at(U("body")).as_string().c_str() << std::endl;
+            for (size_t i = 0; i < v.as_array().size(); ++i) {
+                const auto& post = v.as_array().at(i);
+                std::wcout << std::setw(5) << std::left << i + 1
+                           << std::setw(30) << std::left << post.at(U("title")).as_string().c_str()
+                           << U("| ") << post.at(U("body")).as_string().c_str() << std::endl;
+            }
         } catch (const http_exception& e) {
             std::wcout << e.what() << std::endl;
         }
