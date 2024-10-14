@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # vcpkg toolchain dosyasını ayarlayın (tam yol kullanın)
-set(CMAKE_TOOLCHAIN_FILE "/Users/mehmetfiskindal/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+set(CMAKE_TOOLCHAIN_FILE "~/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 
 project(rest_client)
 

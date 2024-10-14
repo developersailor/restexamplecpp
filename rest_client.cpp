@@ -2,6 +2,8 @@
 #include <cpprest/http_client.h>
 #include <cpprest/json.h>
 #include <cpprest/uri.h>
+#include <iomanip> // For std::setw
+
 int main()
 {
     using namespace web;                      // Genel özellikler (URI vs.)
@@ -30,9 +32,13 @@ int main()
             // JSON değerini al
             const json::value &v = previousTask.get();
 
+            // Tablo başlıklarını yazdır
+            std::wcout << std::setw(20) << std::left << U("Baslik") << U("Icerik") << std::endl;
+            std::wcout << std::setw(20) << std::left << U("------") << U("------") << std::endl;
+
             // JSON değerini yazdır
-            std::wcout << U("Başlık: ") << v.at(U("title")).as_string().c_str() << std::endl;
-            std::wcout << U("İçerik: ") << v.at(U("body")).as_string().c_str() << std::endl;
+            std::wcout << std::setw(20) << std::left << v.at(U("title")).as_string().c_str()
+                       << v.at(U("body")).as_string().c_str() << std::endl;
         } catch (const http_exception& e) {
             std::wcout << e.what() << std::endl;
         }
